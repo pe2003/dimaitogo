@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Voting System</title>
+    <link rel="stylesheet" href="/style.css">
+    <script src="/__/firebase/11.5.0/firebase-app-compat.js"></script>
+    <script src="/__/firebase/11.5.0/firebase-firestore-compat.js"></script>
+    <script src="/__/firebase/init.js"></script>
+    <script defer src="/script.js"></script>
+</head>
+<body>
+    <div class="container">
+        <div id="userInfo"></div>
+
+        <div id="registration" class="form-section">
+            <h2>Регистрация</h2>
+            <select id="role">
+                <option value="">Выберите роль</option>
+                <option value="cook">Повар</option>
+                <option value="waiter">Официант</option>
+            </select>
+            <input type="text" id="surname" placeholder="Фамилия">
+            <input type="text" id="name" placeholder="Имя">
+            <button id="registerButton">Зарегистрироваться</button>
+        </div>
+
+        <div id="voting" class="form-section" style="display: none;">
+            <h2>Голосование</h2>
+            <input type="text" id="waiterInput" placeholder="Официант (Фамилия Имя)" list="waitersListData">
+            <datalist id="waitersListData"></datalist>
+            <button id="voteWaiterStar">Дать ★</button>
+            <button id="voteWaiterPig">Дать 🐷</button>
+            <input type="text" id="cookInput" placeholder="Повар (Фамилия Имя)" list="cooksListData">
+            <datalist id="cooksListData"></datalist>
+            <button id="voteCookStar">Дать ★</button>
+            <button id="voteCookPig">Дать 🐷</button>
+            <div id="voteMessage"></div>
+        </div>
+
+        <div id="myVotes" class="form-section" style="display: none;">
+            <h2>Мои голоса</h2>
+            <div id="myVotesDisplay"></div>
+        </div>
+
+        <div id="lists" class="form-section">
+            <h2>Списки</h2>
+            <div>
+                <strong>Повара:</strong>
+                <div id="cooksList"></div>
+            </div>
+            <div>
+                <strong>Официанты:</strong>
+                <div id="waitersList"></div>
+            </div>
+        </div>
+
+        <!-- Кнопка Admin -->
+        <div style="text-align: center; margin-top: 20px;">
+            <button id="adminButton">Admin</button>
+        </div>
+
+        <div id="adminModal" class="modal">
+            <div class="modal-content">
+                <span class="close" id="closeAdminModal">×</span>
+                <h2>Вход для администратора</h2>
+                <input type="text" id="adminLogin" placeholder="Логин">
+                <input type="password" id="adminPassword" placeholder="Пароль">
+                <button id="adminLoginButton">Войти</button>
+                <div id="adminError" style="color: red;"></div>
+
+                <div id="adminResults" style="display: none;">
+                    <h2>Результаты голосования</h2>
+                    <h3>Повара</h3>
+                    <div id="cooksResults"></div>
+                    <h3>Официанты</h3>
+                    <div id="waitersResults"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
