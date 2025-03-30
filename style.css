@@ -1,0 +1,138 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  margin: 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #74ebd5, #acb6e5);
+  color: #333;
+}
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 15px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+#userInfo {
+  text-align: center;
+  padding: 10px;
+  font-size: 18px;
+  color: #2c3e50;
+}
+
+.form-section {
+  padding: 25px;
+  margin-bottom: 25px;
+  background: #fff;
+  border-radius: 10px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.form-section:hover {
+  transform: translateY(-5px);
+}
+
+h2, h3 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+input, select {
+  display: block;
+  width: 100%;
+  margin: 15px 0;
+  padding: 12px;
+  border: 2px solid #ddd;
+  border-radius: 8px;
+  font-size: 16px;
+  transition: border-color 0.3s ease;
+  box-sizing: border-box;
+}
+
+input:focus, select:focus {
+  border-color: #3498db;
+  outline: none;
+}
+
+button {
+  padding: 12px 20px;
+  margin: 5px;
+  background: linear-gradient(45deg, #2ecc71, #27ae60);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  font-size: 16px;
+  transition: transform 0.2s ease, background 0.3s ease;
+}
+
+button:hover {
+  transform: scale(1.05);
+  background: linear-gradient(45deg, #27ae60, #2ecc71);
+}
+
+#adminButton {
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+}
+
+#adminButton:hover {
+  background: linear-gradient(45deg, #c0392b, #e74c3c);
+}
+
+#voteMessage {
+  margin-top: 15px;
+  font-size: 16px;
+  color: #34495e;
+  text-align: center;
+}
+
+#cooksList div, #waitersList div, #myVotesDisplay div, #cooksResults div, #waitersResults div {
+  padding: 10px;
+  margin: 5px 0;
+  background: #ecf0f1;
+  border-radius: 8px;
+  font-size: 16px;
+}
+
+#myVotes {
+  background: #f9e79f;
+}
+
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: 10% auto;
+  padding: 20px;
+  border-radius: 10px;
+  width: 80%;
+  max-width: 500px;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+}
