@@ -12,71 +12,158 @@
 </head>
 <body>
     <div class="container">
-        <div id="userInfo"></div>
+        <!-- Основной экран -->
+        <div id="mainPage">
+            <div id="userInfo"></div>
 
-        <div id="registration" class="form-section">
-            <h2>Регистрация</h2>
-            <select id="role">
-                <option value="">Выберите роль</option>
-                <option value="cook">Повар</option>
-                <option value="waiter">Официант</option>
-            </select>
-            <input type="text" id="surname" placeholder="Фамилия">
-            <input type="text" id="name" placeholder="Имя">
-            <button id="registerButton">Зарегистрироваться</button>
-        </div>
-
-        <div id="voting" class="form-section" style="display: none;">
-            <h2>Голосование</h2>
-            <input type="text" id="waiterInput" placeholder="Официант (Фамилия Имя)" list="waitersListData">
-            <datalist id="waitersListData"></datalist>
-            <button id="voteWaiterStar">Дать ★</button>
-            <button id="voteWaiterPig">Дать 🐷</button>
-            <input type="text" id="cookInput" placeholder="Повар (Фамилия Имя)" list="cooksListData">
-            <datalist id="cooksListData"></datalist>
-            <button id="voteCookStar">Дать ★</button>
-            <button id="voteCookPig">Дать 🐷</button>
-            <div id="voteMessage"></div>
-        </div>
-
-        <div id="myVotes" class="form-section" style="display: none;">
-            <h2>Мои голоса</h2>
-            <div id="myVotesDisplay"></div>
-        </div>
-
-        <div id="lists" class="form-section">
-            <h2>Списки</h2>
-            <div>
-                <strong>Повара:</strong>
-                <div id="cooksList"></div>
+            <div id="registration" class="form-section">
+                <h2>Регистрация</h2>
+                <select id="role">
+                    <option value="">Выберите роль</option>
+                    <option value="cook">Повар</option>
+                    <option value="waiter">Официант</option>
+                </select>
+                <input type="text" id="surname" placeholder="Фамилия">
+                <input type="text" id="name" placeholder="Имя">
+                <button id="registerButton">Зарегистрироваться</button>
             </div>
-            <div>
-                <strong>Официанты:</strong>
-                <div id="waitersList"></div>
+
+            <div id="voting" class="form-section" style="display: none;">
+                <h2>Голосование</h2>
+                <div id="votingPeriod" class="voting-period"></div>
+
+                <!-- Голосование за официанта (★) -->
+                <div id="waiterStarSection" class="vote-section">
+                    <div class="autocomplete">
+                        <input type="text" id="waiterInputStar" placeholder="Официант (Фамилия Имя)" oninput="updateAutocomplete('waiter', 'star')" onfocus="updateAutocomplete('waiter', 'star')" autocomplete="off">
+                        <div id="waitersSuggestionsStar" class="suggestions"></div>
+                    </div>
+                    <button id="voteWaiterStar">Дать ★</button>
+                </div>
+
+                <!-- Голосование за официанта (🐷) -->
+                <div id="waiterPigSection" class="vote-section">
+                    <div class="autocomplete">
+                        <input type="text" id="waiterInputPig" placeholder="Официант (Фамилия Имя)" oninput="updateAutocomplete('waiter', 'pig')" onfocus="updateAutocomplete('waiter', 'pig')" autocomplete="off">
+                        <div id="waitersSuggestionsPig" class="suggestions"></div>
+                    </div>
+                    <button id="voteWaiterPig">Дать 🐷</button>
+                </div>
+
+                <!-- Голосование за повара (★) -->
+                <div id="cookStarSection" class="vote-section">
+                    <div class="autocomplete">
+                        <input type="text" id="cookInputStar" placeholder="Повар (Фамилия Имя)" oninput="updateAutocomplete('cook', 'star')" onfocus="updateAutocomplete('cook', 'star')" autocomplete="off">
+                        <div id="cooksSuggestionsStar" class="suggestions"></div>
+                    </div>
+                    <button id="voteCookStar">Дать ★</button>
+                </div>
+
+                <!-- Голосование за повара (🐷) -->
+                <div id="cookPigSection" class="vote-section">
+                    <div class="autocomplete">
+                        <input type="text" id="cookInputPig" placeholder="Повар (Фамилия Имя)" oninput="updateAutocomplete('cook', 'pig')" onfocus="updateAutocomplete('cook', 'pig')" autocomplete="off">
+                        <div id="cooksSuggestionsPig" class="suggestions"></div>
+                    </div>
+                    <button id="voteCookPig">Дать 🐷</button>
+                </div>
+
+                <div id="voteMessage"></div>
+            </div>
+
+            <div id="myVotes" class="form-section" style="display: none;">
+                <h2>Мои голоса</h2>
+                <div id="myVotesDisplay"></div>
+            </div>
+
+            <div id="lists" class="form-section" style="display: none;">
+                <h2>Списки</h2>
+                <div>
+                    <strong>Повара:</strong>
+                    <div id="cooksList"></div>
+                </div>
+                <div>
+                    <strong>Официанты:</strong>
+                    <div id="waitersList"></div>
+                </div>
+            </div>
+
+            <!-- Кнопка Admin -->
+            <div style="text-align: center; margin-top: 20px;">
+                <button id="adminButton">Admin</button>
             </div>
         </div>
 
-        <!-- Кнопка Admin -->
-        <div style="text-align: center; margin-top: 20px;">
-            <button id="adminButton">Admin</button>
-        </div>
-
-        <div id="adminModal" class="modal">
-            <div class="modal-content">
-                <span class="close" id="closeAdminModal">×</span>
-                <h2>Вход для администратора</h2>
+        <!-- Экран администратора -->
+        <div id="adminPage" class="form-section" style="display: none;">
+            <h2>Панель администратора</h2>
+            <div id="adminLoginForm">
                 <input type="text" id="adminLogin" placeholder="Логин">
                 <input type="password" id="adminPassword" placeholder="Пароль">
                 <button id="adminLoginButton">Войти</button>
                 <div id="adminError" style="color: red;"></div>
+            </div>
 
-                <div id="adminResults" style="display: none;">
-                    <h2>Результаты голосования</h2>
-                    <h3>Повара</h3>
-                    <div id="cooksResults"></div>
-                    <h3>Официанты</h3>
-                    <div id="waitersResults"></div>
+            <div id="adminResults" style="display: none;">
+                <h3>Установить период голосования</h3>
+                <div id="votingPeriodForm">
+                    <label>Начало голосования:</label>
+                    <input type="date" id="voteStartDate">
+                    <input type="time" id="voteStartTime">
+                    <label>Окончание голосования:</label>
+                    <input type="date" id="voteEndDate">
+                    <input type="time" id="voteEndTime">
+                    <button id="setVotingPeriodButton">Установить период</button>
+                    <div id="votingPeriodMessage" style="margin-top: 10px;"></div>
                 </div>
+
+                <h3>Статистика</h3>
+                <div id="registrationStats">
+                    <p><strong>Всего людей:</strong> <span id="totalPeople">0</span></p>
+                    <p><strong>Прошли регистрацию:</strong> <span id="totalRegistered">0</span></p>
+                    <p><strong>Незарегистрированные:</strong> <span id="totalUnregistered">0</span></p>
+                    <p><strong>Повара:</strong> <span id="totalCooks">0</span></p>
+                    <p><strong>Официанты:</strong> <span id="totalWaiters">0</span></p>
+                </div>
+
+                <div style="text-align: center; margin: 20px 0;">
+                    <button id="googleSheetsButton" onclick="window.open('https://docs.google.com/spreadsheets/d/1QccwRTbP1nmOWMefsYlljvh2LXPZKHqiqyMi0m4z5eM/edit?usp=sharing')">Google Sheets</button>
+                    <button id="clearDatabaseButton">Очистить базу данных</button>
+                </div>
+
+                <h3>Результаты голосования</h3>
+                <h4>Повара (Топ-5 по ★)</h4>
+                <div id="cooksResultsStars"></div>
+                <h4>Повара (Топ-5 по 🐷)</h4>
+                <div id="cooksResultsPigs"></div>
+                <h4>Официанты (Топ-5 по ★)</h4>
+                <div id="waitersResultsStars"></div>
+                <h4>Официанты (Топ-5 по 🐷)</h4>
+                <div id="waitersResultsPigs"></div>
+                <button id="backToMainButton" style="background: linear-gradient(45deg, #3498db, #2980b9); margin-top: 10px;">Назад</button>
+            </div>
+        </div>
+
+        <!-- Всплывающее окно -->
+        <div id="votingRulesModal" class="modal">
+            <div class="modal-content">
+                <h3>Правила голосования</h3>
+                <p>Вам нужно дать:</p>
+                <p>Повару: 1 ★ и 1 🐷</p>
+                <p>Официанту: 1 ★ и 1 🐷</p>
+                <button id="modalOkButton">OK</button>
+            </div>
+        </div>
+
+        <!-- Всплывающее окно для очистки базы данных -->
+        <div id="clearDatabaseModal" class="modal">
+            <div class="modal-content">
+                <h3>Очистка базы данных</h3>
+                <p>Введите пароль для подтверждения:</p>
+                <input type="password" id="clearDatabasePassword" placeholder="Пароль">
+                <div id="clearDatabaseError" style="color: red; margin-top: 10px;"></div>
+                <button id="confirmClearDatabaseButton">Очистить</button>
+                <button id="cancelClearDatabaseButton">Отмена</button>
             </div>
         </div>
     </div>
