@@ -35,7 +35,7 @@ body {
   transform: translateY(-5px);
 }
 
-h2, h3 {
+h2, h3, h4 {
   color: #2c3e50;
   margin-bottom: 20px;
   text-align: center;
@@ -83,6 +83,22 @@ button:hover {
   background: linear-gradient(45deg, #c0392b, #e74c3c);
 }
 
+#googleSheetsButton {
+  background: linear-gradient(45deg, #34a853, #2e8b57);
+}
+
+#googleSheetsButton:hover {
+  background: linear-gradient(45deg, #2e8b57, #34a853);
+}
+
+#clearDatabaseButton {
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+}
+
+#clearDatabaseButton:hover {
+  background: linear-gradient(45deg, #c0392b, #e74c3c);
+}
+
 #voteMessage {
   margin-top: 15px;
   font-size: 16px;
@@ -90,7 +106,9 @@ button:hover {
   text-align: center;
 }
 
-#cooksList div, #waitersList div, #myVotesDisplay div, #cooksResults div, #waitersResults div {
+#cooksList div, #waitersList div, #myVotesDisplay div, 
+#cooksResultsStars div, #cooksResultsPigs div, 
+#waitersResultsStars div, #waitersResultsPigs div {
   padding: 10px;
   margin: 5px 0;
   background: #ecf0f1;
@@ -102,37 +120,157 @@ button:hover {
   background: #f9e79f;
 }
 
+#registrationStats {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#registrationStats p {
+  margin: 5px 0;
+  font-size: 16px;
+}
+
+.autocomplete {
+  position: relative;
+  width: 100%;
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  max-height: 150px;
+  overflow-y: auto;
+  z-index: 1000;
+  display: none;
+}
+
+.suggestions div {
+  padding: 10px;
+  font-size: 16px;
+  color: #333;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+
+.suggestions div:hover {
+  background: #f0f0f0;
+}
+
+.suggestions.active {
+  display: block;
+}
+
+.voting-period {
+  background: linear-gradient(45deg, #3498db, #2980b9);
+  color: white;
+  padding: 15px;
+  border-radius: 8px;
+  text-align: center;
+  margin-bottom: 20px;
+  font-size: 16px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.voting-period p {
+  margin: 0;
+}
+
+#votingPeriodForm {
+  background: #f9f9f9;
+  padding: 20px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+#votingPeriodForm label {
+  display: block;
+  margin: 10px 0 5px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#votingPeriodForm input[type="date"],
+#votingPeriodForm input[type="time"] {
+  width: calc(50% - 10px);
+  display: inline-block;
+  margin: 5px 5px;
+}
+
+#votingPeriodMessage {
+  color: #e74c3c;
+  text-align: center;
+}
+
+/* Стили для всплывающего окна */
 .modal {
   display: none;
   position: fixed;
-  z-index: 1;
-  left: 0;
   top: 0;
+  left: 0;
   width: 100%;
   height: 100%;
-  background-color: rgba(0, 0, 0, 0.5);
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
 }
 
 .modal-content {
-  background-color: #fff;
-  margin: 10% auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #fff;
   padding: 20px;
   border-radius: 10px;
-  width: 80%;
-  max-width: 500px;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  max-width: 400px;
+  width: 90%;
 }
 
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-  cursor: pointer;
+.modal-content button {
+  margin-top: 15px;
+  background: linear-gradient(45deg, #3498db, #2980b9);
 }
 
-.close:hover,
-.close:focus {
-  color: #000;
-  text-decoration: none;
+.modal-content button:hover {
+  background: linear-gradient(45deg, #2980b9, #3498db);
+}
+
+#confirmClearDatabaseButton {
+  background: linear-gradient(45deg, #e74c3c, #c0392b);
+}
+
+#confirmClearDatabaseButton:hover {
+  background: linear-gradient(45deg, #c0392b, #e74c3c);
+}
+
+#cancelClearDatabaseButton {
+  background: linear-gradient(45deg, #95a5a6, #7f8c8d);
+}
+
+#cancelClearDatabaseButton:hover {
+  background: linear-gradient(45deg, #7f8c8d, #95a5a6);
+}
+
+/* Стили для секций голосования */
+.vote-section {
+  display: flex;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.vote-section .autocomplete {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.vote-section button {
+  flex-shrink: 0;
 }
